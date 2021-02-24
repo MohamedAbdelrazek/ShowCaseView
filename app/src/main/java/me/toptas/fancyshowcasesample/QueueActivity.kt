@@ -41,7 +41,7 @@ class QueueActivity : BaseActivity() {
                 .skipSize(22)
                 .descriptionColor(Color.BLACK)
                 .skipColor(Color.CYAN)
-                .description("First Queue Item First Queue Item eue Item Firstemt Queue Item Firstem First Queue Item First Queue Item First Queue Item First Queue Item First Queue Item")
+                .description("First Queue Item First Queue Item eue  First Queue Item First Queue Item First Queue Item First Queue Item First Queue Item")
                 .skipTitle("skip")
                 .skipListener(object : SkipListener {
                     override fun onSkippTitlePressed() {
@@ -57,6 +57,28 @@ class QueueActivity : BaseActivity() {
 
 
         val fancyShowCaseView2 = FancyShowCaseView.Builder(this)
+                .title("First Queue Item ")
+                .titleColor(Color.BLUE)
+                .titleSize(32)
+                .descriptionSize(18)
+                .skipSize(22)
+                .descriptionColor(Color.BLACK)
+                .skipColor(Color.CYAN)
+                .description("First Queue Item eue Item First Queue Item")
+                .skipTitle("skip")
+                .skipListener(object : SkipListener {
+                    override fun onSkippTitlePressed() {
+                        queue.cancel()
+                    }
+
+
+                })
+                .backgroundColor(Color.RED)
+                .focusBorderColor(Color.BLACK)
+                .focusOn(btn_queue_1)
+                .build()
+
+        val fancyShowCaseView23 = FancyShowCaseView.Builder(this)
                 .title("Second Queue Item")
                 .skipTitle("finish")
                 .skipListener(object : SkipListener {
