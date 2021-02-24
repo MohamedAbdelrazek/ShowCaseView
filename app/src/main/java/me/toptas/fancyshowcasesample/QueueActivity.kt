@@ -34,11 +34,14 @@ class QueueActivity : BaseActivity() {
 
         val queue = FancyShowCaseQueue()
         val fancyShowCaseView1 = FancyShowCaseView.Builder(this)
-                .title("First Queue Item")
+                .title("First Queue Item ")
                 .titleColor(Color.BLUE)
+                .titleSize(32)
+                .descriptionSize(18)
+                .skipSize(22)
                 .descriptionColor(Color.BLACK)
                 .skipColor(Color.CYAN)
-                .description("description")
+                .description("First Queue Item First Queue Item eue Item Firstemt Queue Item Firstem First Queue Item First Queue Item First Queue Item First Queue Item First Queue Item")
                 .skipTitle("skip")
                 .skipListener(object : SkipListener {
                     override fun onSkippTitlePressed() {

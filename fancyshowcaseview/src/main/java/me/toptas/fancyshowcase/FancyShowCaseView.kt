@@ -23,6 +23,7 @@ import android.graphics.Typeface
 import android.os.Build
 import android.text.Spanned
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnTouchListener
@@ -218,7 +219,7 @@ class FancyShowCaseView @JvmOverloads constructor(context: Context, attrs: Attri
         inflateCustomView(R.layout.fancy_showcase_view_layout_title, object : OnViewInflateListener {
             override fun onViewInflated(view: View) {
                 val textView = view.findViewById<View>(R.id.fscv_title) as TextView
-                val textContainer = view.findViewById<LinearLayout>(R.id.fcsv_title_container)
+                val textContainer = view.findViewById<RelativeLayout>(R.id.fcsv_title_container)
 
                 props.titleColor?.let {
                     textView.setTextColor(it)
@@ -233,11 +234,11 @@ class FancyShowCaseView @JvmOverloads constructor(context: Context, attrs: Attri
                     textView.typeface = it
                 }
                 if (props.titleSize != -1) {
-                    textView.setTextSize(props.titleSizeUnit, props.titleSize.toFloat())
+                    textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, props.titleSize.toFloat())
                 }
                 textContainer.gravity = props.titleGravity
                 if (props.fitSystemWindows) {
-                    val params = textView.layoutParams as LinearLayout.LayoutParams
+                    val params = textView.layoutParams as RelativeLayout.LayoutParams
                     params.setMargins(0, getStatusBarHeight(context), 0, 0)
                 }
                 if (androidProps.spannedTitle != null) {
@@ -248,7 +249,7 @@ class FancyShowCaseView @JvmOverloads constructor(context: Context, attrs: Attri
 
                 if (props.autoPosText) {
                     val pos = presenter.calcAutoTextPosition()
-                    val params = textView.layoutParams as LinearLayout.LayoutParams
+                    val params = textView.layoutParams as RelativeLayout.LayoutParams
                     params.apply {
                         topMargin = pos.topMargin
                         bottomMargin = pos.bottomMargin
@@ -265,7 +266,7 @@ class FancyShowCaseView @JvmOverloads constructor(context: Context, attrs: Attri
         inflateCustomView(R.layout.fancy_showcase_view_layout_title, object : OnViewInflateListener {
             override fun onViewInflated(view: View) {
                 val textView = view.findViewById<View>(R.id.fscv_desc) as TextView
-                val textContainer = view.findViewById<LinearLayout>(R.id.fcsv_title_container)
+                val textContainer = view.findViewById<RelativeLayout>(R.id.fcsv_title_container)
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     textView.setTextAppearance(props.titleStyle)
@@ -278,12 +279,12 @@ class FancyShowCaseView @JvmOverloads constructor(context: Context, attrs: Attri
                 androidProps.typeface?.let {
                     textView.typeface = it
                 }
-                if (props.titleSize != -1) {
-                    textView.setTextSize(props.titleSizeUnit, props.titleSize.toFloat())
+                if (props.descriptionSize != -1) {
+                    textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, props.descriptionSize.toFloat())
                 }
                 textContainer.gravity = props.titleGravity
                 if (props.fitSystemWindows) {
-                    val params = textView.layoutParams as LinearLayout.LayoutParams
+                    val params = textView.layoutParams as RelativeLayout.LayoutParams
                     params.setMargins(0, getStatusBarHeight(context), 0, 0)
                 }
                 if (androidProps.spannedTitle != null) {
@@ -294,7 +295,7 @@ class FancyShowCaseView @JvmOverloads constructor(context: Context, attrs: Attri
 
                 if (props.autoPosText) {
                     val pos = presenter.calcAutoTextPosition()
-                    val params = textView.layoutParams as LinearLayout.LayoutParams
+                    val params = textView.layoutParams as RelativeLayout.LayoutParams
                     params.apply {
                         topMargin = pos.topMargin
                         bottomMargin = pos.bottomMargin
@@ -311,7 +312,7 @@ class FancyShowCaseView @JvmOverloads constructor(context: Context, attrs: Attri
         inflateCustomView(R.layout.fancy_showcase_view_layout_title, object : OnViewInflateListener {
             override fun onViewInflated(view: View) {
                 val textView = view.findViewById<View>(R.id.fscv_skip) as TextView
-                val textContainer = view.findViewById<LinearLayout>(R.id.fcsv_title_container)
+                val textContainer = view.findViewById<RelativeLayout>(R.id.fcsv_title_container)
                 textView.setOnClickListener {
                     props.skipListener?.let {
                         it.onSkippTitlePressed()
@@ -330,12 +331,12 @@ class FancyShowCaseView @JvmOverloads constructor(context: Context, attrs: Attri
                 androidProps.typeface?.let {
                     textView.typeface = it
                 }
-                if (props.titleSize != -1) {
-                    textView.setTextSize(props.titleSizeUnit, props.titleSize.toFloat())
+                if (props.skipSize != -1) {
+                    textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, props.skipSize.toFloat())
                 }
                 textContainer.gravity = props.titleGravity
                 if (props.fitSystemWindows) {
-                    val params = textView.layoutParams as LinearLayout.LayoutParams
+                    val params = textView.layoutParams as RelativeLayout.LayoutParams
                     params.setMargins(0, getStatusBarHeight(context), 0, 0)
                 }
                 if (androidProps.spannedTitle != null) {
@@ -346,7 +347,7 @@ class FancyShowCaseView @JvmOverloads constructor(context: Context, attrs: Attri
 
                 if (props.autoPosText) {
                     val pos = presenter.calcAutoTextPosition()
-                    val params = textView.layoutParams as LinearLayout.LayoutParams
+                    val params = textView.layoutParams as RelativeLayout.LayoutParams
                     params.apply {
                         topMargin = pos.topMargin
                         bottomMargin = pos.bottomMargin
@@ -513,9 +514,14 @@ class FancyShowCaseView @JvmOverloads constructor(context: Context, attrs: Attri
          * @param unit      title text unit
          * @return Builder
          */
-        fun titleSize(titleSize: Int, unit: Int) = apply {
+        fun titleSize(titleSize: Int) = apply {
             props.titleSize = titleSize
-            props.titleSizeUnit = unit
+        }
+        fun descriptionSize(titleSize: Int) = apply {
+            props.descriptionSize = titleSize
+        }
+        fun skipSize(titleSize: Int) = apply {
+            props.skipSize = titleSize
         }
 
         /**

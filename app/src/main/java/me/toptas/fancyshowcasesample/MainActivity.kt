@@ -70,7 +70,7 @@ class MainActivity : BaseActivity() {
             FancyShowCaseView.Builder(this)
                     .focusOn(it)
                     .title("Title size")
-                    .titleSize(48, TypedValue.COMPLEX_UNIT_SP)
+                    .titleSize(48)
                     .build()
                     .show()
         }
